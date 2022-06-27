@@ -482,11 +482,8 @@ class ConsoleApp( Frame ):
 	    #TODO: For each client host use: consoles[i].sendCmd( '???? ' + ?? +  '> ' + file_path + str(i) + ' 2>&1')
 	for i in range(count/2,count):
             ip = consoles[i-count/2].node.IP()
-            if i==4:
-                consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -u -c ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
-            else:
-                consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -c ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
-	'''	
+            consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -c ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
+		
 	time.sleep(20)
 	switches[0].sendCmd('sudo ifconfig eth1 down')
 	time.sleep(2)
@@ -496,7 +493,6 @@ class ConsoleApp( Frame ):
 	switches[0].sendCmd('sudo ifconfig eth1 down')
 	time.sleep(2)
 	switches[0].sendCmd('sudo ifconfig eth1 up')
-	'''
 	
             
 
