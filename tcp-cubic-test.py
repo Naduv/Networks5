@@ -457,6 +457,9 @@ class ConsoleApp( Frame ):
         if self.waiting( consoles ):
             return
         count = len( consoles )
+	switches = self.consoles[ 'switches' ].consoles
+        if self.waiting( switches ):
+            return
         self.setOutputHook( self.updateCwndGraph )
 
 	#TODO define half of the hosts to be server
@@ -480,6 +483,18 @@ class ConsoleApp( Frame ):
 	for i in range(count/2,count):
             ip = consoles[i-count/2].node.IP()
             consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -c ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
+		
+	time.sleep(20)
+	switches[0].sendCmd('sudo ifconfig eth1 down')
+	time.sleep(2)
+	switches[0].sendCmd('sudo ifconfig eth1 up')
+	
+	time.sleep(18)
+	switches[0].sendCmd('sudo ifconfig eth1 down')
+	time.sleep(2)
+	switches[0].sendCmd('sudo ifconfig eth1 up')
+	
+	
             
 
 	
