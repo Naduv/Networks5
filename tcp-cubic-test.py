@@ -44,7 +44,7 @@ class DoubleSwitchTopo(Topo):
 	    #self.addLink( switch1, switch2, bw=10Mbps, delay='5ms', loss=2,
             #              max_queue_size=1000 )
 
-        self.addLink(switch1, switch2, bw=100, delay='5ms',loss=1)
+        self.addLink(switch1, switch2, bw=20, loss=1)
 	    
 class Console( Frame ):
     "A simple console on a host."
@@ -482,7 +482,10 @@ class ConsoleApp( Frame ):
 	    #TODO: For each client host use: consoles[i].sendCmd( '???? ' + ?? +  '> ' + file_path + str(i) + ' 2>&1')
 	for i in range(count/2,count):
             ip = consoles[i-count/2].node.IP()
-            consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -c ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
+            if i==4:
+                consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -c -u ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
+            else:
+                consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -c ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
 	'''	
 	time.sleep(20)
 	switches[0].sendCmd('sudo ifconfig eth1 down')
