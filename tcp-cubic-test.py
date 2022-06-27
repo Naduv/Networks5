@@ -483,7 +483,7 @@ class ConsoleApp( Frame ):
 	for i in range(count/2,count):
             ip = consoles[i-count/2].node.IP()
             if i==4:
-                consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -c -u ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
+                consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -u -c ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
             else:
                 consoles[i].sendCmd( 'iperf3 -i 1 -t 60 -c ' + ip +  '> ' + file_path + str(i) + ' 2>&1')
 	'''	
